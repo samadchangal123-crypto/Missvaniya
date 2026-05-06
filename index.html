@@ -3,475 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✨ Miss Vaniya - Premium Profile Card Studio ✨</title>
+    <title>Woolen Profile Maker</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-color: #d8dee9;
+            --card-bg: #f5f3eb;
+            --wool-shadow: inset 6px 6px 12px #e2dfd5, inset -6px -6px 12px #ffffff;
+            --outer-shadow: 15px 15px 30px #b0b0b0, -10px -10px 20px #ffffff;
         }
 
         body {
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            font-family: 'Poppins', 'Segoe UI', 'Arial', sans-serif;
-            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+        }
+
+        .upload-container {
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Woolen Card Design */
+        .card {
+            background: var(--card-bg);
+            width: 340px;
+            padding: 30px 20px;
+            border-radius: 45px;
+            box-shadow: var(--outer-shadow);
+            border: 6px solid #f0eee4;
+            text-align: center;
             position: relative;
         }
 
-        /* Animated Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
+        .profile-container {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto;
+        }
+
+        .profile-pic {
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(255, 192, 203, 0.1), transparent 50%);
-            pointer-events: none;
-            z-index: 0;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #4a90e2;
+            background: #eee;
+            box-shadow: var(--wool-shadow);
         }
 
-        /* Main Container */
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Welcome Screen */
-        .welcome-screen {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            backdrop-filter: blur(20px);
-            border-radius: 60px;
-            padding: 40px 30px;
-            text-align: center;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255,255,255,0.2);
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .welcome-screen h1 {
-            font-size: 3.5rem;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 10px;
-        }
-
-        .welcome-screen .miss-name {
-            font-size: 2rem;
-            color: #ffd700;
-            text-shadow: 0 0 20px rgba(255,215,0,0.5);
-            letter-spacing: 2px;
-        }
-
-        .welcome-screen p {
-            color: rgba(255,255,255,0.8);
-            margin-top: 15px;
-            font-size: 1rem;
-        }
-
-        /* Upload Area */
-        .upload-area {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .upload-label {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff9a9e, #fecfef);
-            padding: 12px 30px;
-            border-radius: 50px;
-            cursor: pointer;
+        .vibe-bubble {
+            position: absolute;
+            top: -15px;
+            left: -20px;
+            background: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
             font-weight: bold;
-            color: #333;
-            transition: transform 0.3s;
         }
 
-        .upload-label:hover {
-            transform: scale(1.05);
+        h2 { margin: 20px 0 5px; font-size: 1.3rem; color: #333; }
+        .stats { font-size: 0.85rem; color: #888; margin-bottom: 20px; }
+
+        .bio { font-weight: 800; font-size: 0.95rem; margin: 15px 0; letter-spacing: 0.5px; }
+
+        .music-player {
+            background: #e9e7df;
+            margin: 20px 0;
+            padding: 12px;
+            border-radius: 20px;
+            box-shadow: var(--wool-shadow);
+            font-size: 0.75rem;
         }
 
-        /* Style Selector */
-        .style-selector-area {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: center;
+        .progress-bar {
+            height: 4px;
+            background: #333;
+            width: 80%;
+            margin: 8px auto;
+            border-radius: 2px;
         }
 
-        .style-input-group {
+        .btn-group {
             display: flex;
             gap: 10px;
-            justify-content: center;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
-        .style-input-group input {
-            width: 80px;
+        .btn {
+            flex: 1;
             padding: 12px;
-            border-radius: 25px;
+            border-radius: 15px;
             border: none;
-            text-align: center;
-            font-size: 18px;
             font-weight: bold;
-            background: rgba(255,255,255,0.9);
-        }
-
-        .generate-btn {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
+            box-shadow: 3px 3px 6px #bcbcbc;
         }
 
-        .generate-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(255,107,107,0.5);
-        }
+        .btn-blue { background: #3578e5; color: white; }
+        .btn-grey { background: #cfd1d6; color: #1c1e21; }
 
-        /* Card Container */
-        .card-container {
-            background: rgba(0,0,0,0.3);
-            border-radius: 50px;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-
-        /* All Card Styles (1 to 20) */
-        .profile-card {
-            border-radius: 30px;
-            overflow: hidden;
-            transition: all 0.4s;
-            animation: cardAppear 0.6s ease-out;
-        }
-
-        @keyframes cardAppear {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .profile-card:hover {
-            transform: translateY(-10px);
-        }
-
-        /* Style 1 - Classic Elegance */
-        .style1-card { background: linear-gradient(135deg, #ffffff, #f8f9fa); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .style1-card .card-inner { padding: 30px; text-align: center; }
-        .style1-card .profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; display: block; border: 4px solid #ff9a9e; }
-
-        /* Style 2 - Neon Dream */
-        .style2-card { background: #0a0a0a; box-shadow: 0 0 30px #ff00ff; border: 1px solid #ff00ff; }
-        .style2-card .card-inner { padding: 30px; text-align: center; }
-        .style2-card .profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 3px solid #00ffff; box-shadow: 0 0 20px cyan; }
-        .style2-card h3 { color: #ff00ff; text-shadow: 0 0 10px magenta; }
-
-        /* Style 3 - Glass Magic */
-        .style3-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); }
-        .style3-card .card-inner { padding: 30px; text-align: center; }
-        .style3-card .profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 3px solid white; }
-        .style3-card h3, .style3-card .bio { color: white; }
-
-        /* Style 4 - Vintage Vibes */
-        .style4-card { background: #f4e4c1; box-shadow: 10px 10px 0 #8b6914; }
-        .style4-card .card-inner { padding: 30px; text-align: center; font-family: 'Courier New', monospace; }
-        .style4-card .profile-img { width: 120px; height: 120px; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; object-fit: cover; margin: 0 auto 15px; }
-
-        /* Style 5 - Royal Dark */
-        .style5-card { background: linear-gradient(135deg, #1a1a2e, #16213e); border: 1px solid #e94560; }
-        .style5-card .card-inner { padding: 30px; text-align: center; }
-        .style5-card .profile-img { width: 120px; height: 120px; border-radius: 20px; object-fit: cover; margin: 0 auto 15px; }
-        .style5-card h3 { color: #e94560; }
-
-        /* Style 6 - Rainbow Burst */
-        .style6-card { background: linear-gradient(135deg, #667eea, #764ba2, #f093fb); }
-        .style6-card .card-inner { padding: 30px; text-align: center; }
-        .style6-card .profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 4px solid white; }
-        .style6-card h3, .style6-card .bio { color: white; }
-
-        /* Style 7 - Cyber Punk */
-        .style7-card { background: #1a1a2e; border-left: 5px solid #ff006e; border-right: 5px solid #00f5d4; }
-        .style7-card .card-inner { padding: 30px; text-align: center; }
-        .style7-card .profile-img { width: 120px; height: 120px; clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); object-fit: cover; margin: 0 auto 15px; }
-
-        /* Style 8 - Cute Pastel */
-        .style8-card { background: #fdeff2; }
-        .style8-card .card-inner { padding: 30px; text-align: center; background: white; margin: 10px; border-radius: 40px; }
-        .style8-card .profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 3px solid #ffb7c5; }
-
-        /* Style 9 - 3D Depth */
-        .style9-card { background: #2c3e50; box-shadow: 15px 15px 0 #34495e; }
-        .style9-card .card-inner { padding: 30px; text-align: center; background: #ecf0f1; margin: 5px; border-radius: 20px; }
-
-        /* Style 10 - Ocean Pearl */
-        .style10-card { background: linear-gradient(180deg, #006994, #003d5c); }
-        .style10-card .card-inner { padding: 30px; text-align: center; }
-        .style10-card .profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 4px solid #00b4d8; box-shadow: 0 0 20px #00b4d8; }
-        .style10-card h3, .style10-card .bio { color: white; }
-
-        /* Style 11 - Anime Style */
-        .style11-card { background: linear-gradient(135deg, #ffe6f0, #ffd1dc); border-radius: 50px 50px 30px 30px; }
-        .style11-card .card-inner { padding: 30px; text-align: center; }
-        .style11-card .profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 3px solid #ff69b4; }
-
-        /* Style 12 - Professional */
-        .style12-card { background: #f3f6f9; }
-        .style12-card .card-inner { padding: 25px; display: flex; gap: 20px; align-items: center; }
-        .style12-card .profile-img { width: 90px; height: 90px; border-radius: 15px; object-fit: cover; }
-        .style12-card .info { flex: 1; }
-
-        /* Style 13 - Spotify Mode */
-        .style13-card { background: #121212; }
-        .style13-card .card-inner { padding: 30px; text-align: center; }
-        .style13-card .profile-img { width: 120px; height: 120px; border-radius: 20px; object-fit: cover; margin: 0 auto 15px; }
-        .style13-card .music-bar { width: 70%; height: 4px; background: #1db954; margin: 15px auto; border-radius: 2px; animation: pulse 1s infinite; }
-        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
-
-        /* Style 14 - Polaroid */
-        .style14-card { background: #f5f5dc; padding: 20px 20px 35px; transform: rotate(-2deg); }
-        .style14-card .card-inner { text-align: center; }
-        .style14-card .profile-img { width: 100%; height: 250px; object-fit: cover; }
-
-        /* Style 15 - Dreamy Galaxy */
-        .style15-card { background: linear-gradient(135deg, #667eea, #764ba2); position: relative; overflow: hidden; }
-        .style15-card::before { content: "✨💫⭐"; position: absolute; font-size: 80px; opacity: 0.1; bottom: 10px; right: 10px; }
-        .style15-card .card-inner { padding: 30px; text-align: center; position: relative; z-index: 1; color: white; }
-        .style15-card .profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.5); }
-
-        /* Style 16 - Floral */
-        .style16-card { background: linear-gradient(120deg, #a1c4fd, #c2e9fb); }
-        .style16-card .card-inner { padding: 30px; text-align: center; background: rgba(255,255,255,0.5); margin: 15px; border-radius: 30px; }
-
-        /* Style 17 - Magazine Cover */
-        .style17-card { background: white; }
-        .style17-card .card-inner { padding: 0; }
-        .style17-card .cover { height: 150px; background: linear-gradient(45deg, #ff6b6b, #4ecdc4); }
-        .style17-card .profile-img { width: 90px; height: 90px; border-radius: 50%; margin: -45px auto 10px; display: block; border: 4px solid white; object-fit: cover; }
-        .style17-card .content { padding: 20px; text-align: center; }
-
-        /* Style 18 - Brutal */
-        .style18-card { background: white; border: 3px solid black; box-shadow: 8px 8px 0 black; }
-        .style18-card .card-inner { padding: 25px; text-align: center; }
-        .style18-card .profile-img { width: 120px; height: 120px; filter: grayscale(100%); object-fit: cover; }
-
-        /* Style 19 - Golden Luxe */
-        .style19-card { background: linear-gradient(135deg, #1a1a2e, #2d2d44); border: 2px solid #ffd700; }
-        .style19-card .card-inner { padding: 30px; text-align: center; }
-        .style19-card .profile-img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #ffd700; box-shadow: 0 0 20px gold; }
-        .style19-card h3, .style19-card .bio { color: #ffd700; }
-
-        /* Style 20 - Minimal Chic */
-        .style20-card { background: #ffffff; border-radius: 20px; border-top: 6px solid #ff6b6b; }
-        .style20-card .card-inner { padding: 30px; text-align: center; }
-        .style20-card .profile-img { width: 100px; height: 100px; border-radius: 20px; object-fit: cover; }
-
-        /* Common Card Elements */
-        .profile-card h3 { margin: 10px 0 5px; font-size: 1.4rem; }
-        .profile-card .bio { font-size: 0.85rem; margin: 5px 0; opacity: 0.9; }
-        .profile-card .stats { display: flex; justify-content: center; gap: 25px; margin-top: 15px; font-size: 0.75rem; }
-        .profile-card .stats div { text-align: center; }
-        .profile-card .stats strong { font-size: 1rem; display: block; }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 25px;
-            color: rgba(255,255,255,0.7);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        .footer .premier {
-            font-size: 1rem;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Welcome Screen -->
-        <div class="welcome-screen">
-            <h1>✨ Welcome ✨</h1>
-            <div class="miss-name">Miss Vaniya</div>
-            <p>Your Personal Profile Style Studio</p>
+
+    <div class="upload-container">
+        <label>Upload Screenshot: </label>
+        <input type="file" id="imageInput" accept="image/*">
+    </div>
+
+    <div class="card">
+        <div class="profile-container">
+            <div class="vibe-bubble" id="vibeText">Current vibe...</div>
+            <img id="outputImage" class="profile-pic" src="https://via.placeholder.com/150" alt="Profile">
         </div>
 
-        <!-- Upload Section -->
-        <div class="upload-area">
-            <label class="upload-label">
-                📸 Upload Your Screenshot / Photo
-                <input type="file" id="photoUpload" accept="image/*" style="display: none;">
-            </label>
+        <h2 id="cardTitle">Loading...</h2>
+        <p class="stats" id="friendsCount">---</p>
+
+        <p class="bio" id="bioText">---</p>
+
+        <div class="music-player">
+            <div class="progress-bar"></div>
+            <div>04:02 ● 00:00</div>
+            <p id="location" style="margin:5px 0 0; font-weight:bold;">---</p>
         </div>
 
-        <!-- Style Selection -->
-        <div class="style-selector-area">
-            <p style="color: white; margin-bottom: 10px;">🎨 Choose Your Style Number (1 to 20)</p>
-            <div class="style-input-group">
-                <input type="number" id="styleNumber" min="1" max="20" value="1" placeholder="1-20">
-                <button class="generate-btn" id="generateBtn">✨ Generate My Card ✨</button>
-            </div>
-        </div>
-
-        <!-- Card Display -->
-        <div class="card-container" id="cardContainer">
-            <!-- Dynamic card will appear here -->
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <div class="premier">🏷️ Premiered by Miss Vaniya</div>
-            <div style="margin-top: 8px; font-size: 0.75rem;">✨ Create Your Unique Style ✨</div>
+        <div class="btn-group">
+            <button class="btn btn-blue">+ Add to story</button>
+            <button class="btn btn-grey">Edit profile</button>
         </div>
     </div>
 
     <script>
-        // Profile Data (Users can edit here)
-        const profileData = {
-            name: "Miss Vaniya",
-            bio: "✨ Making the world beautiful | Creative Designer | Dreamer ✨",
-            location: "📍 Mumbai, India",
-            posts: "248",
-            followers: "15.2K",
-            following: "1.2K"
-        };
+        // JSON data load karna
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('cardTitle').innerText = data.cardTitle;
+                document.getElementById('friendsCount').innerText = data.friendsCount;
+                document.getElementById('bioText').innerText = data.bioText;
+                document.getElementById('location').innerText = data.location;
+                document.getElementById('vibeText').innerText = data.vibeText;
+            });
 
-        let currentPhoto = "https://randomuser.me/api/portraits/women/68.jpg";
-
-        // Update photo on upload
-        document.getElementById('photoUpload').addEventListener('change', function(e) {
+        // User ka SS handle karna
+        document.getElementById('imageInput').addEventListener('change', function(e) {
             const reader = new FileReader();
             reader.onload = function() {
-                currentPhoto = reader.result;
-                generateCard();
-            };
-            if (e.target.files[0]) {
-                reader.readAsDataURL(e.target.files[0]);
+                document.getElementById('outputImage').src = reader.result;
             }
+            reader.readAsDataURL(e.target.files[0]);
         });
-
-        // Generate card based on style number
-        function generateCard() {
-            const styleNum = parseInt(document.getElementById('styleNumber').value);
-            if (styleNum < 1 || styleNum > 20) {
-                alert("Please select a number between 1 and 20!");
-                return;
-            }
-
-            const container = document.getElementById('cardContainer');
-            const card = document.createElement('div');
-            card.className = `profile-card style${styleNum}-card`;
-            
-            let innerHtml = '';
-            
-            // Different layouts for different styles
-            if (styleNum === 12) {
-                innerHtml = `
-                    <div class="card-inner">
-                        <img class="profile-img" src="${currentPhoto}" alt="Profile">
-                        <div class="info">
-                            <h3>${profileData.name}</h3>
-                            <div class="bio">${profileData.bio}</div>
-                            <div style="font-size: 12px; margin: 8px 0;">${profileData.location}</div>
-                            <div class="stats">
-                                <div><strong>${profileData.posts}</strong><br>posts</div>
-                                <div><strong>${profileData.followers}</strong><br>followers</div>
-                                <div><strong>${profileData.following}</strong><br>following</div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-            else if (styleNum === 17) {
-                innerHtml = `
-                    <div class="card-inner">
-                        <div class="cover"></div>
-                        <img class="profile-img" src="${currentPhoto}" alt="Profile">
-                        <div class="content">
-                            <h3>${profileData.name}</h3>
-                            <div class="bio">${profileData.bio}</div>
-                            <div style="font-size: 12px; margin: 5px 0;">${profileData.location}</div>
-                            <div class="stats">
-                                <div><strong>${profileData.posts}</strong><br>posts</div>
-                                <div><strong>${profileData.followers}</strong><br>followers</div>
-                                <div><strong>${profileData.following}</strong><br>following</div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-            else if (styleNum === 13) {
-                innerHtml = `
-                    <div class="card-inner">
-                        <img class="profile-img" src="${currentPhoto}" alt="Profile">
-                        <h3 style="color: white; margin-top: 15px;">${profileData.name}</h3>
-                        <div class="bio" style="color: #b3b3b3;">${profileData.bio}</div>
-                        <div class="music-bar"></div>
-                        <div style="color: #1db954; font-size: 11px; margin-top: 5px;">🎵 Now playing: Miss Vaniya Vibes</div>
-                        <div style="color: #888; font-size: 10px; margin-top: 10px;">${profileData.location}</div>
-                        <div class="stats" style="color: white;">
-                            <div><strong>${profileData.posts}</strong><br>posts</div>
-                            <div><strong>${profileData.followers}</strong><br>followers</div>
-                            <div><strong>${profileData.following}</strong><br>following</div>
-                        </div>
-                    </div>
-                `;
-            }
-            else {
-                innerHtml = `
-                    <div class="card-inner">
-                        <img class="profile-img" src="${currentPhoto}" alt="Profile">
-                        <h3>${profileData.name}</h3>
-                        <div class="bio">${profileData.bio}</div>
-                        <div style="font-size: 11px; margin: 8px 0;">${profileData.location}</div>
-                        <div class="stats">
-                            <div><strong>${profileData.posts}</strong><br>posts</div>
-                            <div><strong>${profileData.followers}</strong><br>followers</div>
-                            <div><strong>${profileData.following}</strong><br>following</div>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            card.innerHTML = innerHtml;
-            container.innerHTML = '';
-            container.appendChild(card);
-        }
-
-        // Generate on button click
-        document.getElementById('generateBtn').addEventListener('click', generateCard);
-        
-        // Initial generate
-        generateCard();
     </script>
 </body>
 </html>
+2
